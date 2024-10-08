@@ -1,0 +1,304 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MediPoli - Plataforma de Gestión Médica Avanzada</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #4a90e2;
+            --secondary-color: #50c878;
+            --accent-color: #f39c12;
+            --text-color: #ffffff;
+            --bg-color: #1a1a2e;
+        }
+        
+        body, html {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+            overflow-x: hidden;
+            height: 100%;
+        }
+        
+        .particles-js {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+        
+        header {
+            background-color: rgba(26, 26, 46, 0.8);
+            padding: 15px 0;
+            box-shadow: 0 4px 20px rgba(0,255,255,0.3);
+            position: relative;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        h1 {
+            font-size: 36px;
+            margin: 0;
+            font-weight: 600;
+            position: relative;
+            color: var(--primary-color);
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            animation: subtle-glow 3s ease-in-out infinite alternate;
+        }
+        
+        @keyframes subtle-glow {
+            from {
+                text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            }
+            to {
+                text-shadow: 0 0 10px rgba(74, 144, 226, 0.7), 0 0 20px rgba(74, 144, 226, 0.5);
+            }
+        }
+        
+        h1::before, h1::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+        }
+        
+        h1::before {
+            background: var(--bg-color);
+            animation: typewriter 4s steps(8) 1s forwards;
+        }
+        
+        h1::after {
+            width: 0.125em;
+            background: var(--primary-color);
+            animation: typewriter 4s steps(8) 1s forwards,
+                       blink 750ms steps(8) infinite;
+        }
+        
+        @keyframes typewriter {
+            to {
+                left: 100%;
+            }
+        }
+        
+        @keyframes blink {
+            to {
+                background: transparent;
+            }
+        }
+        
+        nav {
+            display: flex;
+            gap: 20px;
+        }
+        
+        nav a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: 400;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            padding: 10px 15px;
+            border-radius: 25px;
+            position: relative;
+            overflow: hidden;
+            background: rgba(255,255,255,0.1);
+        }
+        
+        nav a::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: all 0.5s ease;
+        }
+        
+        nav a:hover::before {
+            left: 100%;
+        }
+        
+        nav a:hover {
+            color: var(--accent-color);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0,255,255,0.3);
+        }
+        
+        #main-section {
+            padding: 20px 0;
+            position: relative;
+            height: calc(100vh - 80px);
+        }
+        
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,255,255,0.3);
+            background-color: rgba(255, 255, 255, 0.05);
+            transition: all 0.5s ease;
+        }
+        
+        iframe:hover {
+            transform: scale(1.02);
+            box-shadow: 0 20px 40px rgba(0,255,255,0.5);
+        }
+        
+        .floating-icon {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            color: var(--bg-color);
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 24px;
+            box-shadow: 0 10px 20px rgba(0,255,255,0.3);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .floating-icon:hover {
+            transform: scale(1.1) rotate(15deg);
+            box-shadow: 0 15px 30px rgba(0,255,255,0.5);
+        }
+        
+        .video-bg {
+            position: fixed;
+            right: 0;
+            bottom: 0;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            z-index: -2;
+            opacity: 0.15;
+        }
+        
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            nav {
+                margin-top: 15px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            nav a {
+                margin: 5px;
+            }
+            
+            #main-section {
+                height: calc(100vh - 150px);
+            }
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+</head>
+<body>
+    <div id="particles-js" class="particles-js"></div>
+    
+    <video autoplay muted loop class="video-bg">
+        <source src="https://assets.mixkit.co/videos/preview/mixkit-abstract-technology-network-connections-27872-large.mp4" type="video/mp4">
+    </video>
+    
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <h1>MediPoli</h1>
+                </div>
+                <nav>
+                    <a onclick="loadPage('interfaz-main/interfaz.html')"><i class="fas fa-home"></i> Inicio</a>
+                    <a onclick="loadPage('Gestion Usuarios/index.html')"><i class="fas fa-users"></i> Gestión de Usuarios</a>
+                    <a onclick="loadPage('index/gestion_roles_perfiles.html')"><i class="fas fa-user-tag"></i> Roles y Perfiles</a>
+                    <a onclick="loadPage('login/index.html')"><i class="fas fa-sign-in-alt"></i> Login</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <section id="main-section">
+                <iframe id="main-iframe" src="interfaz-main/interfaz.html" title="Contenido principal">
+                    Tu navegador no soporta iframes.
+                </iframe>
+            </section>
+        </div>
+    </main>
+
+    <div class="floating-icon">
+        <i class="fas fa-question"></i>
+    </div>
+
+    <script>
+        function loadPage(pageUrl) {
+            const iframe = document.getElementById("main-iframe");
+            iframe.src = pageUrl;
+            history.pushState({ page: pageUrl }, '', pageUrl);
+        }
+
+        window.onpopstate = function(event) {
+            const iframe = document.getElementById("main-iframe");
+            if (event.state && event.state.page) {
+                iframe.src = event.state.page;
+            } else {
+                iframe.src = "interfaz-main/interfaz.html";
+            }
+        };
+
+        particlesJS("particles-js", {
+            particles: {
+                number: { value: 80, density: { enable: true, value_area: 800 } },
+                color: { value: "#00ffff" },
+                shape: { type: "circle" },
+                opacity: { value: 0.5, random: true },
+                size: { value: 3, random: true },
+                line_linked: { enable: true, distance: 150, color: "#00ffff", opacity: 0.4, width: 1 },
+                move: { enable: true, speed: 6, direction: "none", random: true, straight: false, out_mode: "out", bounce: false }
+            },
+            interactivity: {
+                detect_on: "canvas",
+                events: { onhover: { enable: true, mode: "repulse" }, onclick: { enable: true, mode: "push" }, resize: true },
+                modes: { grab: { distance: 400, line_linked: { opacity: 1 } }, bubble: { distance: 400, size: 40, duration: 2, opacity: 8, speed: 3 }, repulse: { distance: 200, duration: 0.4 }, push: { particles_nb: 4 }, remove: { particles_nb: 2 } }
+            },
+            retina_detect: true
+        });
+    </script>
+</body>
+</html>
