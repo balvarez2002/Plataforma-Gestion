@@ -1,0 +1,370 @@
+<html lang="es">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Perfil de usuario</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet"/>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .container {
+            background-color: white;
+            border-radius: 10px;
+            padding: 30px;
+            width: 80%;
+            max-width: 800px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-top: 0;
+            margin-bottom: 20px;
+        }
+        .header {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .logo {
+            width: 50px;
+            height: 50px;
+            margin-right: 10px;
+        }
+        .company-name {
+            font-size: 24px;
+            font-weight: 500;
+        }
+        .content {
+            display: flex;
+        }
+        .left-column {
+            flex: 2;
+            padding-right: 20px;
+        }
+        .right-column {
+            flex: 1;
+            border-left: 1px solid #ccc;
+            padding-left: 20px;
+        }
+        .section {
+            margin-bottom: 20px;
+        }
+        .section-title {
+            font-weight: 500;
+            color: #666;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 5px;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+        }
+        .section-title i {
+            color: #999;
+        }
+        .field {
+            margin-bottom: 20px;
+            position: relative;
+        }
+        .field-label {
+            color: #999;
+            font-size: 12px;
+            position: absolute;
+            top: -10px;
+            left: 10px;
+            background-color: white;
+            padding: 0 5px;
+        }
+        .field-circle {
+            width: auto;
+            height: auto;
+            border-radius: 15px;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: absolute;
+            top: -12px;
+            left: 10px;
+            font-size: 12px;
+            color: #666;
+            padding: 2px 8px;
+            white-space: nowrap;
+        }
+        .field-value {
+            font-weight: 500;
+        }
+        .edit-button {
+            color: #999;
+            cursor: pointer;
+            margin-bottom: 20px;  /* Increased from 10px to 20px */
+        }
+        .right-column .section {
+            background-color: #f9f9f9;
+            border-radius: 5px;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+        .right-column .section-title {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+        .exit-button, .register-button {
+            background-color: #f0f0f0;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 500;
+            margin-top: 20px;
+        }
+        .exit-button {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #f0f0f0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            transition: background-color 0.3s;
+        }
+        .exit-button:hover {
+            background-color: #e0e0e0;
+        }
+        .register-button {
+            display: block;
+            margin: 20px auto 0;
+        }
+        input[type="text"], input[type="email"], input[type="tel"], select {
+            width: 100%;
+            padding: 10px 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-size: 14px;
+            margin-top: 15px;
+        }
+        .section-content {
+            display: none;
+            margin-top: 10px;
+        }
+        .role-button {
+            display: block;
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 5px;
+            background-color: #f0f0f0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            text-align: left;
+            cursor: pointer;
+        }
+        .role-button.active {
+            background-color: #e0e0e0;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Perfil de usuario</h1>
+        <div class="header">
+            <img alt="Logotipo circular con diseño geométrico" class="logo" src="https://i.ibb.co/djnPQPD/logo.png" width="50" height="50"/>
+            <span class="company-name">RoleHUB</span>
+        </div>
+        <div class="content">
+            <div class="left-column">
+                <div class="section">
+                    <div class="section-title">
+                        Datos Personales
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="edit-button">
+                        <i class="fas fa-pencil-alt"></i>
+                        Editar
+                    </div>
+                    <div class="field">
+                        <div class="field-circle">Nombre</div>
+                        <input type="text" id="nombre" value="Role" />
+                    </div>
+                    <div class="field">
+                        <div class="field-circle">Apellido</div>
+                        <input type="text" id="apellido" value="HUB" />
+                    </div>
+                    <div class="field">
+                        <div class="field-circle">Correo electrónico</div>
+                        <input type="email" id="email" value="correodeprueba@gmail.com" />
+                    </div>
+                    <div class="field">
+                        <div class="field-circle">Número de celular</div>
+                        <input type="tel" id="telefono" value="+57 1234567891" />
+                    </div>
+                    <div class="field">
+                        <div class="field-circle">Rol</div>
+                        <select id="rol">
+                            <option value="medico_general">Médico General</option>
+                            <option value="cardiologo">Cardiólogo</option>
+                            <option value="pediatra">Pediatra</option>
+                            <option value="enfermero">Enfermero</option>
+                            <option value="administrador">Administrador</option>
+                            <option value="paciente">Paciente</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="right-column">
+                <div class="section">
+                    <div class="section-title">
+                        Roles
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <i class="fas fa-users"></i>
+                    <div class="section-content" id="roles-content">
+                        <button class="role-button" data-role="medico_general">Médico General</button>
+                        <button class="role-button" data-role="cardiologo">Cardiólogo</button>
+                        <button class="role-button" data-role="pediatra">Pediatra</button>
+                        <button class="role-button" data-role="enfermero">Enfermero</button>
+                        <button class="role-button" data-role="administrador">Administrador</button>
+                        <button class="role-button" data-role="paciente">Paciente</button>
+                    </div>
+                </div>
+                <div class="section">
+                    <div class="section-title">
+                        Datos Médicos
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <i class="fas fa-user-md"></i>
+                    <div class="section-content" id="datos-medicos-content">
+                        <!-- Contenido dinámico -->
+                    </div>
+                </div>
+                <div class="section">
+                    <div class="section-title">
+                        Estadísticas
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <i class="fas fa-chart-bar"></i>
+                    <div class="section-content" id="estadisticas-content">
+                        <!-- Contenido dinámico -->
+                    </div>
+                </div>
+                <div class="section">
+                    <div class="section-title">
+                        Turnos
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <i class="far fa-calendar-alt"></i>
+                    <div class="section-content">
+                        <input type="text" id="calendario" placeholder="Seleccionar fecha">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button class="register-button">REGISTRAR</button>
+    </div>
+    <button class="exit-button">SALIR</button>
+
+    <script>
+        
+        function saveData() {
+            localStorage.setItem('nombre', document.getElementById('nombre').value);
+            localStorage.setItem('apellido', document.getElementById('apellido').value);
+            localStorage.setItem('email', document.getElementById('email').value);
+            localStorage.setItem('telefono', document.getElementById('telefono').value);
+            localStorage.setItem('rol', document.getElementById('rol').value);
+        }
+
+        function loadData() {
+            document.getElementById('nombre').value = localStorage.getItem('nombre') || 'Role';
+            document.getElementById('apellido').value = localStorage.getItem('apellido') || 'HUB';
+            document.getElementById('email').value = localStorage.getItem('email') || 'correodeprueba@gmail.com';
+            document.getElementById('telefono').value = localStorage.getItem('telefono') || '+57 1234567891';
+            const rolGuardado = localStorage.getItem('rol') || 'medico_general';
+            document.getElementById('rol').value = rolGuardado;
+            document.querySelector(`[data-role="${rolGuardado}"]`).classList.add('active');
+            actualizarInformacion(rolGuardado);
+        }
+
+        loadData();
+
+        document.querySelectorAll('input, select').forEach(input => {
+            input.addEventListener('change', saveData);
+        });
+
+        document.querySelectorAll('.section-title').forEach(title => {
+            title.addEventListener('click', function() {
+                const content = this.nextElementSibling.nextElementSibling;
+                content.style.display = content.style.display === 'none' ? 'block' : 'none';
+                this.querySelector('i').classList.toggle('fa-chevron-down');
+                this.querySelector('i').classList.toggle('fa-chevron-up');
+            });
+        });
+
+        function actualizarInformacion(rol) {
+            const datosMedicos = document.getElementById('datos-medicos-content');
+            const estadisticas = document.getElementById('estadisticas-content');
+
+            const datosMedicosPorRol = {
+                medico_general: "<p>Licencia Médica: MG12345</p><p>Especialidad: Medicina General</p><p>Años de experiencia: 5</p>",
+                cardiologo: "<p>Licencia Médica: CR78901</p><p>Especialidad: Cardiología</p><p>Años de experiencia: 10</p>",
+                pediatra: "<p>Licencia Médica: PD23456</p><p>Especialidad: Pediatría</p><p>Años de experiencia: 8</p>",
+                enfermero: "<p>Licencia: EN34567</p><p>Área: Cuidados Intensivos</p><p>Años de experiencia: 6</p>",
+                administrador: "<p>ID de Empleado: AD45678</p><p>Departamento: Administración Hospitalaria</p><p>Años en el cargo: 7</p>",
+                paciente: "<p>Número de Historia Clínica: HC56789</p><p>Grupo Sanguíneo: O+</p><p>Alergias: Ninguna conocida</p>"
+            };
+
+            const estadisticasPorRol = {
+                medico_general: "<p>Pacientes atendidos: 1200</p><p>Consultas mensuales: 150</p><p>Satisfacción del paciente: 92%</p>",
+                cardiologo: "<p>Cirugías realizadas: 300</p><p>Pacientes en seguimiento: 500</p><p>Tasa de éxito en tratamientos: 95%</p>",
+                pediatra: "<p>Vacunas aplicadas: 2000</p><p>Consultas de control: 180 mensuales</p><p>Índice de crecimiento saludable: 98%</p>",
+                enfermero: "<p>Turnos completados: 240</p><p>Horas de cuidado directo: 1800</p><p>Evaluación de desempeño: 96%</p>",
+                administrador: "<p>Proyectos gestionados: 15</p><p>Presupuesto administrado: $5M</p><p>Eficiencia operativa: 94%</p>",
+                paciente: "<p>Citas programadas: 5</p><p>Última visita: 15/04/2023</p><p>Adherencia al tratamiento: 90%</p>"
+            };
+
+            datosMedicos.innerHTML = datosMedicosPorRol[rol];
+            estadisticas.innerHTML = estadisticasPorRol[rol];
+        }
+
+        document.getElementById('rol').addEventListener('change', function() {
+            const selectedRole = this.value;
+            document.querySelectorAll('.role-button').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.role === selectedRole);
+            });
+            actualizarInformacion(selectedRole);
+            saveData();
+        });
+
+        flatpickr("#calendario", {
+            dateFormat: "Y-m-d",
+            minDate: "today",
+        });
+
+        document.querySelectorAll('.section-content').forEach(content => {
+            content.style.display = 'block';
+        });
+
+        document.querySelector('.register-button').addEventListener('click', function() {
+            alert('Registro exitoso!');
+        });
+    </script>
+</body>
+</html>

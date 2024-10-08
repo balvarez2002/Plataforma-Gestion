@@ -1,0 +1,233 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interfaz</title>
+    <link rel="stylesheet" href="estilo.css">
+    <style>
+        body {
+            background-color: #ffffff;
+        }
+        .container {
+            background-color: #ffffff;
+        }
+        .left-column, .center-column, .right-column {
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            padding: 15px;
+            border-radius: 5px;
+        }
+        #calendar {
+            font-family: Arial, sans-serif;
+        }
+        #calendar table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        #calendar th, #calendar td {
+            padding: 10px;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+        #calendar th {
+            background-color: #f2f2f2;
+        }
+        #calendarControls {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        .right-column-content {
+            display: flex;
+            justify-content: space-between;
+        }
+        .user-management, .side-menu {
+            width: 48%;
+            border: 1px solid #ddd;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .side-menu ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        .side-menu li {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Columna izquierda -->
+        <div class="left-column">
+            <!-- Perfil -->
+             <br>
+            <div class="profile">
+                <img src="logo.png" alt="Perfil">
+                <p>Perfil</p>
+                <p>correodeprueba@gmail.com</p>
+            </div>
+            <!-- Soporte -->
+            <div class="support">
+        
+                <h3>Soporte</h3>
+                <ul>
+                
+                    <li><img src="rendimiento.png" width= 20px height="20 px"> Comparar Rendimiento</li>
+                    <br>
+                    <li><img src="configuracion.png" width= 20px height="20 px" > Configuración</li>
+                    <br> 
+                    <li><img src="comparacion.png" width= 20px height="20 px"> Prioridades</li>
+                    <br>
+                    <li><img src="comentarios.png" width= 20px height="20 px"> Comentarios</li>
+                    <br>
+                    <li><img src="nube.png" width= 20px height="20 px"> Archivo</li>
+                </ul>
+            
+            </div>
+            <!-- Filtro de periodo -->
+             <br>
+
+            <div class="filter-period">
+                <img src="filtro.png" width= 50px height="50 px">
+                <p>Filtrar Periodo</p>
+                <select>
+                    <option value="septiembre-octubre">Septiembre - Octubre</option>
+                </select>
+            </div>
+            <br> 
+            <button class="salir">Salir</button>
+        </div>
+            <br>
+            <br> 
+        <!-- Columna central -->
+        <div class="center-column">
+            <!-- Usuarios -->
+            <div class="users">
+                <h3>Usuarios</h3>
+                <p>21</p>
+                <button>Ver más</button>
+            </div>
+            <!-- Calendario -->
+            <div class="calendar">
+                <h3>Calendario</h3>
+                <div id="calendarControls">
+                    <button id="prevMonth">Anterior</button>
+                    <span id="currentMonth"></span>
+                    <button id="nextMonth">Siguiente</button>
+                </div>
+                <div id="calendar">
+                    <!-- Aquí se insertará el calendario -->
+                </div>
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+                <script>
+                    let currentDate = moment();
+
+                    function generateCalendar(year, month) {
+                        const firstDay = moment([year, month]);
+                        const lastDay = moment(firstDay).endOf('month');
+                        
+                        let calendarHTML = '<table><tr><th>Dom</th><th>Lun</th><th>Mar</th><th>Mié</th><th>Jue</th><th>Vie</th><th>Sáb</th></tr><tr>';
+                        
+                        for (let i = 0; i < firstDay.day(); i++) {
+                            calendarHTML += '<td></td>';
+                        }
+                        
+                        for (let i = 1; i <= lastDay.date(); i++) {
+                            if (firstDay.day() === 0 && i > 1) {
+                                calendarHTML += '</tr><tr>';
+                            }
+                            calendarHTML += `<td>${i}</td>`;
+                            firstDay.add(1, 'day');
+                        }
+                        
+                        calendarHTML += '</tr></table>';
+                        document.getElementById('calendar').innerHTML = calendarHTML;
+                        document.getElementById('currentMonth').textContent = moment([year, month]).format('MMMM YYYY');
+                    }
+
+                    function updateCalendar() {
+                        generateCalendar(currentDate.year(), currentDate.month());
+                    }
+
+                    document.getElementById('prevMonth').addEventListener('click', () => {
+                        currentDate.subtract(1, 'month');
+                        updateCalendar();
+                    });
+
+                    document.getElementById('nextMonth').addEventListener('click', () => {
+                        currentDate.add(1, 'month');
+                        updateCalendar();
+                    });
+
+                    updateCalendar();
+                </script>
+            </div>
+            <!-- Roles, Estadísticas, Datos Médicos, Turnos -->
+            <div class="bottom-row">
+                <div class="card">
+                    <img src="user.png" width= 50px height="50 px">
+                    <p>Roles</p>
+                </div>
+                <div class="card">
+                    <img src="estadisticas.png" width= 30px height="30 px">
+                    <p>Estadísticas</p>
+                </div>
+                <div class="card">
+                    <img src="usuario.png" width= 20px height="20 px">
+                    <p>Datos Médicos</p> 
+                </div>
+                <div class="card">
+                    <img src="turnos.png" width= 20px height="20 px">
+                    <p>Turnos</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Columna derecha -->
+        <div class="right-column">
+            <!-- Reporte diario -->
+            <div class="daily-report">
+                <h3>Reporte diario</h3>
+                <img src="grafica.png" width= "20 px" height="20px">
+            </div>
+            <!-- Gestión de usuarios y Menú lateral -->
+            <div class="right-column-content">
+                <div class="user-management">
+                    <h3>Gestion de Usuarios</h3>
+                    <img src="gestion de usuarios.png" width= "60px" height="80 px">
+                    <br>
+                    <button>Añadir</button>
+                    <button>Eliminar</button>
+                </div>
+                <div class="side-menu">
+                    <ul>
+                        <li><img src="inicio.png" width="20px"> Inicio</li>
+                        <li><img src="listas.png" width="20px"> Listas</li>
+                        <li><img src="documentos.png" width="20px"> Documentos</li>
+                        <li><img src="usuario.png" width="20px"> Cliente</li>
+                        <li><img src="estadisticas.png" width="20px"> Promedio</li>
+                        <li><img src="revision.png" width="20px"> Revisiones</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Gestiona tus usuarios, Obten Metricas en Tiempo Real -->
+             <br>
+        
+            <div class="bottom-row">
+                <div class="card">
+                    <br>
+                    <p>Gestiona Tus Usuarios</p>
+                </div>
+                <div class="card">
+                    <br>
+                    <p>Obten Metricas en Tiempo Real</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="animacion.js"></script>
+
+</body>
+</html>
